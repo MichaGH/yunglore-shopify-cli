@@ -632,6 +632,7 @@
         "text_color": "#742415",
         "muted_text": "#8E6757",
         "accent_color": "#742415",
+        "card_border": "#E6DBD0",
         "card_bg": "#FFFBF7"
       }
     }
