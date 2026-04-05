@@ -1,0 +1,993 @@
+{% liquid
+  assign current_product = product
+  assign selected_variant = current_product.selected_or_first_available_variant
+  assign product_form_id = 'yl-product-form-' | append: section.id
+%}
+
+<section class="yl-product-information" id="yl-section-{{ section.id }}">
+  <div class="page-width">
+    <div class="yl-product-information__inner">
+      <div class="yl-product-information__grid">
+        <div class="yl-product-information__media">
+          {% if current_product.featured_media != blank %}
+            <div class="yl-product-information__media-main">
+              {{
+                current_product.featured_media
+                | image_url: width: 1800
+                | image_tag:
+                  widths: '600, 800, 1000, 1200, 1400, 1600, 1800',
+                  loading: 'eager',
+                  class: 'yl-product-information__image'
+              }}
+            </div>
+          {% else %}
+            <div class="yl-product-information__media-placeholder">
+              {{ 'product-1' | placeholder_svg_tag: 'yl-product-information__placeholder-svg' }}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="yl-product-information__content">
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'vendor' %}
+                {% if current_product.vendor != blank %}
+                  <div class="yl-product-information__vendor" {{ block.shopify_attributes }}>
+                    {{ current_product.vendor }}
+                  </div>
+                {% endif %}
+
+              {% when 'title' %}
+                <div class="yl-product-information__title-wrap" {{ block.shopify_attributes }}>
+                  <h1 class="yl-product-information__title">{{ current_product.title }}</h1>
+                </div>
+
+              {% when 'price' %}
+                <div
+                  class="yl-product-information__price-wrap"
+                  id="yl-price-{{ section.id }}"
+                  {{ block.shopify_attributes }}
+                >
+                  <div class="yl-product-information__price-row">
+                    {% if selected_variant.compare_at_price > selected_variant.price %}
+                      <span class="yl-product-information__price yl-product-information__price--sale">
+                        {{ selected_variant.price | money }}
+                      </span>
+                      <span class="yl-product-information__compare-price">
+                        {{ selected_variant.compare_at_price | money }}
+                      </span>
+                    {% else %}
+                      <span class="yl-product-information__price">
+                        {{ selected_variant.price | money }}
+                      </span>
+                    {% endif %}
+                  </div>
+
+                  {% if block.settings.show_tax_notice %}
+                    <div class="yl-product-information__price-note">
+                      {% if cart.taxes_included %}
+                        Vrátane dane.
+                      {% else %}
+                        Daň a doprava sa vypočítajú pri pokladni.
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                </div>
+
+              {% when 'short_description' %}
+                {% if current_product.description != blank %}
+                  <div class="yl-product-information__description rte" {{ block.shopify_attributes }}>
+                    {{ current_product.description }}
+                  </div>
+                {% endif %}
+
+              {% when 'sku' %}
+                <div
+                  class="yl-product-information__meta-line"
+                  {{ block.shopify_attributes }}
+                  {% if selected_variant.sku == blank %}
+                    style="display:none"
+                  {% endif %}
+                >
+                  <span class="yl-product-information__meta-label">SKU</span>
+                  <span class="yl-product-information__meta-value" id="yl-sku-{{ section.id }}">
+                    {{- selected_variant.sku -}}
+                  </span>
+                </div>
+
+              {% when 'inventory' %}
+                <div
+                  class="yl-product-information__inventory"
+                  id="yl-inventory-{{ section.id }}"
+                  {{ block.shopify_attributes }}
+                >
+                  {% assign inventory_threshold = block.settings.low_stock_threshold
+                    | default: section.settings.low_stock_threshold
+                  %}
+                  {% if selected_variant.available %}
+                    {% if selected_variant.inventory_management != blank
+                      and selected_variant.inventory_quantity <= inventory_threshold
+                      and selected_variant.inventory_quantity > 0
+                    %}
+                      <span
+                        class="yl-product-information__inventory-dot yl-product-information__inventory-dot--low"
+                      ></span>
+                      <span class="yl-product-information__inventory-text"
+                        >Už len {{ selected_variant.inventory_quantity }} ks skladom</span
+                      >
+                    {% else %}
+                      <span class="yl-product-information__inventory-dot"></span>
+                      <span class="yl-product-information__inventory-text">Skladom</span>
+                    {% endif %}
+                  {% else %}
+                    <span
+                      class="yl-product-information__inventory-dot yl-product-information__inventory-dot--out"
+                    ></span>
+                    <span class="yl-product-information__inventory-text">Momentálne nedostupné</span>
+                  {% endif %}
+                </div>
+
+              {% when 'variant_picker' %}
+                {% unless current_product.has_only_default_variant %}
+                  <div class="yl-product-information__variants" {{ block.shopify_attributes }}>
+                    {% for option in current_product.options_with_values %}
+                      <div class="yl-product-information__option-group">
+                        <div class="yl-product-information__option-label">
+                          {{ option.name }}
+                        </div>
+
+                        <div class="yl-product-information__option-values">
+                          {% for value in option.values %}
+                            {% liquid
+                              assign input_id = 'option-' | append: section.id | append: '-' | append: option.position | append: '-' | append: forloop.index0
+                              assign is_selected = false
+                              if option.selected_value == value
+                                assign is_selected = true
+                              endif
+                            %}
+                            <input
+                              class="yl-product-information__option-input"
+                              type="radio"
+                              id="{{ input_id }}"
+                              name="options[{{ option.name | escape }}]"
+                              value="{{ value | escape }}"
+                              form="{{ product_form_id }}"
+                              {% if is_selected %}
+                                checked
+                              {% endif %}
+                            >
+                            <label class="yl-product-information__option-pill" for="{{ input_id }}">
+                              {{ value }}
+                            </label>
+                          {% endfor %}
+                        </div>
+                      </div>
+                    {% endfor %}
+                  </div>
+                {% endunless %}
+
+              {% when 'buy_form' %}
+                <div class="yl-product-information__form-wrap" {{ block.shopify_attributes }}>
+                  {% form 'product',
+                    current_product,
+                    id: product_form_id,
+                    class: 'yl-product-information__form',
+                    novalidate: 'novalidate',
+                    data-type: 'add-to-cart-form'
+                  %}
+                    <input
+                      type="hidden"
+                      name="id"
+                      id="yl-variant-id-{{ section.id }}"
+                      value="{{ selected_variant.id }}"
+                    >
+
+                    {% if block.settings.show_quantity %}
+                      <div class="yl-product-information__quantity-wrap">
+                        <label class="yl-product-information__quantity-label" for="Quantity-{{ section.id }}">
+                          Množstvo
+                        </label>
+
+                        <div class="yl-product-information__quantity-box">
+                          <button
+                            type="button"
+                            class="yl-product-information__qty-btn"
+                            data-qty-minus
+                            aria-label="Znížiť množstvo"
+                          >
+                            −
+                          </button>
+
+                          <input
+                            class="yl-product-information__qty-input"
+                            id="Quantity-{{ section.id }}"
+                            type="number"
+                            name="quantity"
+                            value="1"
+                            min="1"
+                            inputmode="numeric"
+                          >
+
+                          <button
+                            type="button"
+                            class="yl-product-information__qty-btn"
+                            data-qty-plus
+                            aria-label="Zvýšiť množstvo"
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                    {% endif %}
+
+                    <div class="yl-product-information__buttons">
+                      <button
+                        type="submit"
+                        name="add"
+                        class="yl-product-information__add-to-cart"
+                        {% unless selected_variant.available %}
+                          disabled
+                        {% endunless %}
+                      >
+                        {% if selected_variant.available %}
+                          Pridať do košíka
+                        {% else %}
+                          Nedostupné
+                        {% endif %}
+                      </button>
+
+                      {% if block.settings.show_dynamic_checkout %}
+                        <div class="yl-product-information__dynamic-checkout">
+                          {{ form | payment_button }}
+                        </div>
+                      {% endif %}
+                    </div>
+                  {% endform %}
+                </div>
+
+              {% when 'details_line' %}
+                {% if block.settings.text != blank %}
+                  <div class="yl-product-information__details-line" {{ block.shopify_attributes }}>
+                    {{ block.settings.text }}
+                  </div>
+                {% endif %}
+
+              {% when 'custom_text' %}
+                {% if block.settings.text != blank %}
+                  <div class="yl-product-information__custom-text rte" {{ block.shopify_attributes }}>
+                    {{ block.settings.text }}
+                  </div>
+                {% endif %}
+
+              {% when 'accordion' %}
+                {% if block.settings.heading != blank or block.settings.content != blank %}
+                  <details class="yl-product-information__accordion" {{ block.shopify_attributes }}>
+                    <summary class="yl-product-information__accordion-summary">
+                      <span>{{ block.settings.heading }}</span>
+                      <span class="yl-product-information__accordion-icon">+</span>
+                    </summary>
+                    <div class="yl-product-information__accordion-content rte">
+                      {{ block.settings.content }}
+                    </div>
+                  </details>
+                {% endif %}
+
+              {% when 'share' %}
+                <div class="yl-product-information__share" {{ block.shopify_attributes }}>
+                  <button
+                    type="button"
+                    class="yl-product-information__share-btn"
+                    data-share-url="{{ request.origin }}{{ current_product.url }}"
+                  >
+                    Kopírovať odkaz na produkt
+                  </button>
+                </div>
+            {% endcase %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    const sectionId = '{{ section.id }}';
+    const productData = {{ current_product | json }};
+    const form = document.getElementById(`yl-product-form-${sectionId}`);
+    if (!form) return;
+
+    const variantIdInput = document.getElementById(`yl-variant-id-${sectionId}`);
+    const priceWrap = document.getElementById(`yl-price-${sectionId}`);
+    const skuWrap = document.getElementById(`yl-sku-${sectionId}`);
+    const inventoryWrap = document.getElementById(`yl-inventory-${sectionId}`);
+    const addToCartBtn = form.querySelector('button[name="add"]');
+    const qtyInput = form.querySelector('.yl-product-information__qty-input');
+
+    function formatMoney(cents) {
+      if (window.Shopify && Shopify.formatMoney) {
+        return Shopify.formatMoney(cents, {{ shop.money_format | json }});
+      }
+      return (cents / 100).toFixed(2);
+    }
+
+    function getSelectedOptions() {
+      const selected = [];
+      productData.options.forEach((optionName) => {
+        const inputs = form.querySelectorAll(`input[name="options[${optionName.replace(/"/g, '\\"')}]"]`);
+        let checkedValue = null;
+        inputs.forEach((input) => {
+          if (input.checked) checkedValue = input.value;
+        });
+        if (checkedValue !== null) selected.push(checkedValue);
+      });
+      return selected;
+    }
+
+    function findVariant() {
+      const selectedOptions = getSelectedOptions();
+      return productData.variants.find((variant) => {
+        return variant.options.every((option, index) => option === selectedOptions[index]);
+      });
+    }
+
+    function updateInventory(variant) {
+      if (!inventoryWrap || !variant) return;
+
+      const threshold = {{ section.settings.low_stock_threshold | default: 5 }};
+      let html = '';
+
+      if (variant.available) {
+        if (
+          variant.inventory_management &&
+          typeof variant.inventory_quantity === 'number' &&
+          variant.inventory_quantity > 0 &&
+          variant.inventory_quantity <= threshold
+        ) {
+          html = `
+            <span class="yl-product-information__inventory-dot yl-product-information__inventory-dot--low"></span>
+            <span class="yl-product-information__inventory-text">Už len ${variant.inventory_quantity} ks skladom</span>
+          `;
+        } else {
+          html = `
+            <span class="yl-product-information__inventory-dot"></span>
+            <span class="yl-product-information__inventory-text">Skladom</span>
+          `;
+        }
+      } else {
+        html = `
+          <span class="yl-product-information__inventory-dot yl-product-information__inventory-dot--out"></span>
+          <span class="yl-product-information__inventory-text">Momentálne nedostupné</span>
+        `;
+      }
+
+      inventoryWrap.innerHTML = html;
+    }
+
+    function updatePrice(variant) {
+      if (!priceWrap || !variant) return;
+
+      const compareAt = variant.compare_at_price;
+      const price = variant.price;
+
+      let html = '<div class="yl-product-information__price-row">';
+      if (compareAt && compareAt > price) {
+        html += `
+          <span class="yl-product-information__price yl-product-information__price--sale">${formatMoney(price)}</span>
+          <span class="yl-product-information__compare-price">${formatMoney(compareAt)}</span>
+        `;
+      } else {
+        html += `<span class="yl-product-information__price">${formatMoney(price)}</span>`;
+      }
+      html += '</div>';
+
+      {% assign tax_notice_enabled = false %}
+      {% for block in section.blocks %}
+        {% if block.type == 'price' and block.settings.show_tax_notice %}
+          {% assign tax_notice_enabled = true %}
+        {% endif %}
+      {% endfor %}
+
+      {% if tax_notice_enabled %}
+        html += `<div class="yl-product-information__price-note">{% if cart.taxes_included %}Vrátane dane.{% else %}Daň a doprava sa vypočítajú pri pokladni.{% endif %}</div>`;
+      {% endif %}
+
+      priceWrap.innerHTML = html;
+    }
+
+    function updateSKU(variant) {
+      if (!skuWrap) return;
+      skuWrap.textContent = variant && variant.sku ? variant.sku : '';
+      const line = skuWrap.closest('.yl-product-information__meta-line');
+      if (line) {
+        line.style.display = variant && variant.sku ? '' : 'none';
+      }
+    }
+
+    function updateButton(variant) {
+      if (!addToCartBtn || !variant) return;
+
+      if (variant.available) {
+        addToCartBtn.disabled = false;
+        addToCartBtn.textContent = 'Pridať do košíka';
+      } else {
+        addToCartBtn.disabled = true;
+        addToCartBtn.textContent = 'Nedostupné';
+      }
+    }
+
+    function updateURL(variant) {
+      if (!variant) return;
+      const url = new URL(window.location.href);
+      url.searchParams.set('variant', variant.id);
+      window.history.replaceState({}, '', url.toString());
+    }
+
+    function updateVariant() {
+      const variant = findVariant();
+      if (!variant) return;
+
+      if (variantIdInput) variantIdInput.value = variant.id;
+      updatePrice(variant);
+      updateSKU(variant);
+      updateInventory(variant);
+      updateButton(variant);
+      updateURL(variant);
+    }
+
+    form.querySelectorAll('.yl-product-information__option-input').forEach((input) => {
+      input.addEventListener('change', updateVariant);
+    });
+
+    if (qtyInput) {
+      const minusBtn = form.querySelector('[data-qty-minus]');
+      const plusBtn = form.querySelector('[data-qty-plus]');
+
+      if (minusBtn) {
+        minusBtn.addEventListener('click', () => {
+          const current = parseInt(qtyInput.value || '1', 10);
+          qtyInput.value = Math.max(1, current - 1);
+        });
+      }
+
+      if (plusBtn) {
+        plusBtn.addEventListener('click', () => {
+          const current = parseInt(qtyInput.value || '1', 10);
+          qtyInput.value = current + 1;
+        });
+      }
+    }
+
+    document.querySelectorAll(`#yl-section-${sectionId} [data-share-url]`).forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const url = btn.getAttribute('data-share-url');
+        try {
+          await navigator.clipboard.writeText(url);
+          const original = btn.textContent;
+          btn.textContent = 'Odkaz skopírovaný';
+          setTimeout(() => {
+            btn.textContent = original;
+          }, 1800);
+        } catch (e) {}
+      });
+    });
+
+    updateVariant();
+  })();
+</script>
+
+<style>
+  #yl-section-{{ section.id }}.yl-product-information {
+    background: #FFFFFF;
+    color: #111111;
+    padding: 56px 0 88px;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__inner {
+    max-width: 1380px;
+    margin: 0 auto;
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.8fr);
+    gap: 64px;
+    align-items: start;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__media-main,
+  #yl-section-{{ section.id }} .yl-product-information__media-placeholder {
+    background: #fafafa;
+    border: 1px solid rgba(17,17,17,0.08);
+    border-radius: 28px;
+    overflow: hidden;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__image,
+  #yl-section-{{ section.id }} .yl-product-information__media-main img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__content {
+    position: relative;
+    padding-top: 4px;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__content > * + * {
+    margin-top: 22px;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__vendor {
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(17,17,17,0.58);
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__title {
+    margin: 0;
+    font-size: clamp(34px, 4.1vw, 62px);
+    line-height: 0.96;
+    letter-spacing: -0.055em;
+    font-weight: 500;
+    color: #111111;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__price-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__price {
+    font-size: clamp(24px, 2vw, 34px);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    font-weight: 500;
+    color: #111111;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__compare-price {
+    font-size: 18px;
+    line-height: 1;
+    color: rgba(17,17,17,0.42);
+    text-decoration: line-through;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__price-note {
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: rgba(17,17,17,0.58);
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__description,
+  #yl-section-{{ section.id }} .yl-product-information__custom-text {
+    font-size: 15px;
+    line-height: 1.85;
+    color: #111111;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__meta-line,
+  #yl-section-{{ section.id }} .yl-product-information__inventory {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(17,17,17,0.72);
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__meta-label {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(17,17,17,0.48);
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__inventory-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    background: #2c7a4b;
+    flex: 0 0 auto;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__inventory-dot--low {
+    background: #c78b2f;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__inventory-dot--out {
+    background: #b13a3a;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__variants {
+    display: grid;
+    gap: 18px;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__option-group {
+    display: grid;
+    gap: 10px;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__option-label {
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(17,17,17,0.58);
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__option-values {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__option-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__option-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 12px 18px;
+    border-radius: 999px;
+    border: 1px solid rgba(17,17,17,0.12);
+    background: #ffffff;
+    font-size: 14px;
+    line-height: 1;
+    color: #111111;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__option-input:checked + .yl-product-information__option-pill {
+    background: #111111;
+    color: #ffffff;
+    border-color: #111111;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__form {
+    display: grid;
+    gap: 20px;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__quantity-wrap {
+    display: grid;
+    gap: 10px;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__quantity-label {
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(17,17,17,0.58);
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__quantity-box {
+    width: 144px;
+    display: grid;
+    grid-template-columns: 44px 1fr 44px;
+    align-items: center;
+    border: 1px solid rgba(17,17,17,0.12);
+    border-radius: 999px;
+    background: #ffffff;
+    overflow: hidden;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__qty-btn {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: #111111;
+    font-size: 24px;
+    line-height: 1;
+    height: 48px;
+    cursor: pointer;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__qty-input {
+    appearance: textfield;
+    border: 0;
+    background: transparent;
+    text-align: center;
+    font-size: 15px;
+    color: #111111;
+    height: 48px;
+    outline: none;
+    width: 100%;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__qty-input::-webkit-outer-spin-button,
+  #yl-section-{{ section.id }} .yl-product-information__qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__buttons {
+    display: grid;
+    gap: 14px;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__add-to-cart {
+    min-height: 58px;
+    border: 0;
+    border-radius: 999px;
+    background: #111111;
+    color: #ffffff;
+    font-size: 15px;
+    line-height: 1;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__add-to-cart:hover {
+    opacity: 0.92;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__add-to-cart:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__dynamic-checkout .shopify-payment-button__button,
+  #yl-section-{{ section.id }} .yl-product-information__dynamic-checkout .shopify-payment-button__button--unbranded {
+    min-height: 58px !important;
+    border-radius: 999px !important;
+    overflow: hidden;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__details-line {
+    font-size: 12px;
+    line-height: 1.8;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(17,17,17,0.5);
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__accordion {
+    border-top: 1px solid rgba(17,17,17,0.1);
+    padding-top: 18px;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__accordion:last-child {
+    border-bottom: 1px solid rgba(17,17,17,0.1);
+    padding-bottom: 18px;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__accordion-summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    cursor: pointer;
+    font-size: 15px;
+    line-height: 1.4;
+    color: #111111;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__accordion-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__accordion-icon {
+    font-size: 22px;
+    line-height: 1;
+    color: rgba(17,17,17,0.55);
+    transition: transform 0.2s ease;
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__accordion[open] .yl-product-information__accordion-icon {
+    transform: rotate(45deg);
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__accordion-content {
+    padding-top: 14px;
+    font-size: 14px;
+    line-height: 1.85;
+    color: rgba(17,17,17,0.8);
+  }
+
+  #yl-section-{{ section.id }} .yl-product-information__share-btn {
+    appearance: none;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: rgba(17,17,17,0.68);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  @media screen and (max-width: 989px) {
+    #yl-section-{{ section.id }}.yl-product-information {
+      padding: 34px 0 72px;
+    }
+
+    #yl-section-{{ section.id }} .yl-product-information__inner {
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+
+    #yl-section-{{ section.id }} .yl-product-information__grid {
+      grid-template-columns: 1fr;
+      gap: 34px;
+    }
+
+    #yl-section-{{ section.id }} .yl-product-information__title {
+      font-size: 38px;
+      line-height: 0.98;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "YL Product information",
+  "tag": "section",
+  "class": "section section-yl-product-information",
+  "settings": [
+    {
+      "type": "range",
+      "id": "low_stock_threshold",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "label": "Prahová hodnota nízkeho skladu",
+      "default": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "vendor",
+      "name": "Značka / výrobca",
+      "limit": 1
+    },
+    {
+      "type": "title",
+      "name": "Názov produktu",
+      "limit": 1
+    },
+    {
+      "type": "price",
+      "name": "Cena",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_tax_notice",
+          "label": "Zobraziť poznámku o dani a doprave",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "short_description",
+      "name": "Popis produktu",
+      "limit": 1
+    },
+    {
+      "type": "sku",
+      "name": "SKU",
+      "limit": 1
+    },
+    {
+      "type": "inventory",
+      "name": "Dostupnosť",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "range",
+          "id": "low_stock_threshold",
+          "min": 1,
+          "max": 20,
+          "step": 1,
+          "label": "Nízky sklad",
+          "default": 5
+        }
+      ]
+    },
+    {
+      "type": "variant_picker",
+      "name": "Varianty",
+      "limit": 1
+    },
+    {
+      "type": "buy_form",
+      "name": "Nákupný formulár",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_quantity",
+          "label": "Zobraziť množstvo",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_dynamic_checkout",
+          "label": "Zobraziť rýchlu platbu",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "details_line",
+      "name": "Jemný doplnkový riadok",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "custom_text",
+      "name": "Vlastný text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "accordion",
+      "name": "Rozbaľovací blok",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Nadpis",
+          "default": "Ďalšie informácie"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Obsah",
+          "default": "<p>Doplňte sem informácie o produkte, doručení, starostlivosti alebo iné dôležité detaily.</p>"
+        }
+      ]
+    },
+    {
+      "type": "share",
+      "name": "Zdieľanie",
+      "limit": 1
+    }
+  ],
+  "presets": [
+    {
+      "name": "YL Product information",
+      "blocks": [
+        { "type": "vendor" },
+        { "type": "title" },
+        { "type": "price" },
+        { "type": "short_description" },
+        { "type": "inventory" },
+        { "type": "variant_picker" },
+        { "type": "buy_form" },
+        { "type": "accordion" },
+        { "type": "share" }
+      ]
+    }
+  ]
+}
+{% endschema %}

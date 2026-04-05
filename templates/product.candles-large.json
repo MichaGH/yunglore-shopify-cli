@@ -1,0 +1,536 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "product-information",
+      "blocks": {
+        "media-gallery": {
+          "type": "_product-media-gallery",
+          "static": true,
+          "settings": {
+            "media_presentation": "carousel",
+            "media_columns": "two",
+            "image_gap": 4,
+            "large_first_image": false,
+            "icons_style": "none",
+            "slideshow_controls_style": "counter",
+            "slideshow_mobile_controls_style": "dots",
+            "thumbnail_position": "right",
+            "thumbnail_width": 44,
+            "thumbnail_radius": 0,
+            "aspect_ratio": "1",
+            "constrain_to_viewport": false,
+            "media_fit": "contain",
+            "media_radius": 0,
+            "extend_media": false,
+            "zoom": true,
+            "video_loop": false,
+            "hide_variants": true,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "product-details": {
+          "type": "_product-details",
+          "static": true,
+          "settings": {
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "details_position": "flex-start",
+            "gap": 28,
+            "sticky_details_desktop": true,
+            "inherit_color_scheme": true,
+            "color_scheme": "scheme-1",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 24,
+            "padding-block-end": 24,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "group_icgrde": {
+              "type": "group",
+              "name": "Header",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 12,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "background_media": "none",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "link": "",
+                "open_in_new_tab": false,
+                "placeholder": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "text_xrnftG": {
+                  "type": "text",
+                  "name": "Product title",
+                  "settings": {
+                    "text": "<h1>{{ closest.product.title }}</h1>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "h3",
+                    "font": "var(--font-primary--family)",
+                    "font_size": "",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "price_tVjtKg": {
+                  "type": "price",
+                  "settings": {
+                    "show_sale_price_first": true,
+                    "show_installments": false,
+                    "show_tax_info": false,
+                    "type_preset": "paragraph",
+                    "width": "100%",
+                    "alignment": "left",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "color": "var(--color-foreground)",
+                    "padding-block-start": 4,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_xrnftG",
+                "price_tVjtKg"
+              ]
+            },
+            "divider_VJhene": {
+              "type": "_divider",
+              "name": "t:names.divider",
+              "settings": {
+                "thickness": 1,
+                "corner_radius": "square",
+                "width_percent": 100,
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {}
+            },
+            "variant_picker_R3rGDr": {
+              "type": "variant-picker",
+              "settings": {
+                "variant_style": "buttons",
+                "show_swatches": false,
+                "alignment": "left",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "buy_buttons_eYQEYi": {
+              "type": "buy-buttons",
+              "settings": {
+                "stacking": true,
+                "show_pickup_availability": false,
+                "gift_card_form": true,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "quantity": {
+                  "type": "quantity",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                },
+                "add-to-cart": {
+                  "type": "add-to-cart",
+                  "static": true,
+                  "settings": {
+                    "style_class": "button"
+                  },
+                  "blocks": {}
+                },
+                "accelerated-checkout": {
+                  "type": "accelerated-checkout",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                }
+              },
+              "block_order": []
+            },
+            "text_aEtTtq": {
+              "type": "text",
+              "name": "Product description",
+              "settings": {
+                "text": "{{ closest.product.description }}",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-primary--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "group_icgrde",
+            "divider_VJhene",
+            "variant_picker_R3rGDr",
+            "buy_buttons_eYQEYi",
+            "text_aEtTtq"
+          ]
+        }
+      },
+      "settings": {
+        "content_width": "content-center-aligned",
+        "desktop_media_position": "left",
+        "equal_columns": true,
+        "limit_details_width": true,
+        "gap": 48,
+        "enable_sticky_add_to_cart": true,
+        "color_scheme": "",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "product_recommendations_qggXJq": {
+      "type": "product-recommendations",
+      "blocks": {
+        "text_cbcgyb": {
+          "type": "text",
+          "name": "t:names.header",
+          "settings": {
+            "text": "<h3>You may also like </h3>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h4",
+            "font": "var(--font-primary--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 8,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 8,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_DNizbJ": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "adapt",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_M7MJkb": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_gLWgA6": {
+              "type": "price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_DNizbJ",
+            "product_title_M7MJkb",
+            "price_gLWgA6"
+          ]
+        }
+      },
+      "block_order": [
+        "text_cbcgyb"
+      ],
+      "name": "t:names.product_recommendations",
+      "settings": {
+        "product": "{{ closest.product }}",
+        "recommendation_type": "related",
+        "layout_type": "grid",
+        "carousel_on_mobile": false,
+        "max_products": 4,
+        "columns": 4,
+        "mobile_columns": "2",
+        "columns_gap": 12,
+        "rows_gap": 24,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "gap": 28,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    },
+    "yl_candle_intro_EGp4Cz": {
+      "type": "yl-candle-intro",
+      "name": "YL Candle — Intro",
+      "settings": {
+        "eyebrow": "Atmosféra sviečky",
+        "heading": "Tichý moment, ktorý mení náladu priestoru",
+        "intro": "<p><br/>Každá sviečka Yung Lore vzniká ako malý moment pokoja. Jemne doplní priestor, zjemní večer a pomôže spomaliť, keď je toho priveľa. Atmosféra sa s ňou mení nenápadne, takmer sama od seba.<br/><br/>Nie je to len vôňa a svetlo. Je to nálada, ktorá sa potichu usadí v miestnosti a zmení spôsob, akým človek vníma prítomný okamih.<br/><br/></p>",
+        "soft_quote": "Pre chvíle, ktoré nemusia byť veľké, aby boli výnimočné.",
+        "mood_words": "",
+        "image": "shopify://shop_images/sviecka_zhora_cut_91385c2a-e3ca-402d-b24f-a778846165dd.png",
+        "section_bg": "#ffffff",
+        "text_color": "#742415",
+        "muted_text": "#8e6757",
+        "accent_color": "#742415",
+        "soft_line": "#e8d8cd"
+      }
+    },
+    "yl_candle_about_crystals_BjCE63": {
+      "type": "yl-candle-about-crystals",
+      "blocks": {
+        "crystal_gAqqtp": {
+          "type": "crystal",
+          "settings": {
+            "crystal_label": "Main crystal",
+            "background_word": "Opal",
+            "crystal_name": "Opal",
+            "crystal_words": "Gentle | Luminous | Emotionally uplifting | Encouraging openness | Calming emotions | Awakening inner light",
+            "description": "<p>Opal carries a soft, luminous energy that feels both tender and quietly radiant. It is often associated with emotional openness, inner sensitivity, and a gentle return to lightness. In a candle like Coco D’or, it complements the creamy warmth of coconut and vanilla with something more delicate — a sense of softness, calm, and quiet glow.</p>",
+            "chakra_1": "Heart Chakra",
+            "chakra_2": "Crown Chakra",
+            "chakra_3": "",
+            "chakra_4": "",
+            "zodiac_1": "Libra",
+            "zodiac_2": "Pisces",
+            "zodiac_3": "Cancer",
+            "zodiac_4": "",
+            "image": "shopify://shop_images/opal_cut_20f0adb5-c003-439b-8b3b-b00a29962a01.png"
+          }
+        }
+      },
+      "block_order": [
+        "crystal_gAqqtp"
+      ],
+      "name": "YL Candle — About Crystals",
+      "settings": {
+        "eyebrow": "Crystal story",
+        "heading": "The crystal within the candle",
+        "intro": "<p>A softer, more intimate look at the stone chosen for this candle — its mood, symbolism, and the quiet atmosphere it brings into the space.</p>",
+        "section_bg": "#ffffff",
+        "text_color": "#742415",
+        "muted_text": "#8e624e",
+        "accent_color": "#742415",
+        "soft_line": "#e8d8cd",
+        "glow_color": "#f6e5da"
+      }
+    },
+    "yl_candle_fragrance_VhJ6cN": {
+      "type": "yl-candle-fragrance",
+      "blocks": {
+        "type_tags_xd3aV4": {
+          "type": "type_tags",
+          "settings": {
+            "panel_label": "Fragrance type",
+            "panel_title": "Mood & character",
+            "panel_text": "<p>Use this for abstract scents where mood matters more than ingredients.</p>",
+            "tag_1": "Warm",
+            "tag_2": "Soft",
+            "tag_3": "Elegant",
+            "tag_4": "",
+            "tag_5": "",
+            "tag_6": ""
+          }
+        },
+        "notes_VL9kK4": {
+          "type": "notes",
+          "settings": {
+            "panel_label": "Scent notes",
+            "panel_title": "Fragrance notes",
+            "panel_text": "<p>A layered composition that opens softly and settles into warmth.</p>",
+            "note_top": "Coconut",
+            "note_heart": "Creamy Vanilla",
+            "note_base": "Sweet Musk"
+          }
+        },
+        "branding_erRrPB": {
+          "type": "branding",
+          "settings": {
+            "panel_label": "Best enjoyed",
+            "panel_title": "A few final details",
+            "panel_text": "<p>Small details that help place the fragrance in a moment, a room, or a season.</p>",
+            "best_for": "Relaxation / Evenings",
+            "room_type": "Bedroom / Living room",
+            "season": "Autumn / Winter"
+          }
+        }
+      },
+      "block_order": [
+        "type_tags_xd3aV4",
+        "notes_VL9kK4",
+        "branding_erRrPB"
+      ],
+      "name": "YLCandle—Fragrance",
+      "settings": {
+        "eyebrow": "Fragrance",
+        "heading": "The scent that fills the room",
+        "scent_name": "Coconut — Vanilla",
+        "description": "<p>A warm and creamy fragrance that feels sunlit, soft, and quietly indulgent. Coconut brings roundness and ease, while vanilla lingers with a smooth sweetness that never feels too heavy.</p>",
+        "text_color": "#742415",
+        "muted_text": "#8e6757",
+        "accent_color": "#742415",
+        "line_color": "#e8ddd3",
+        "panel_border": "#e6dbd0"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "product_recommendations_qggXJq",
+    "yl_candle_intro_EGp4Cz",
+    "yl_candle_about_crystals_BjCE63",
+    "yl_candle_fragrance_VhJ6cN"
+  ]
+}

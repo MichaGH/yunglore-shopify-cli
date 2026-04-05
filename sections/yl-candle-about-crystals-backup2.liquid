@@ -1,0 +1,1246 @@
+{% liquid
+  assign section_bg = section.settings.section_bg
+  assign text_color = section.settings.text_color
+  assign muted_text = section.settings.muted_text
+  assign accent_color = section.settings.accent_color
+  assign soft_line = section.settings.soft_line
+  assign glow_color = section.settings.glow_color
+%}
+
+<section class="yl-candle-about-crystals" id="yl-section-{{ section.id }}">
+  <div class="page-width">
+    <div class="yl-candle-about-crystals__inner">
+      {% if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.intro != blank %}
+        <div class="yl-candle-about-crystals__head">
+          {% if section.settings.eyebrow != blank %}
+            <p class="yl-candle-about-crystals__eyebrow">{{ section.settings.eyebrow }}</p>
+          {% endif %}
+
+          {% if section.settings.heading != blank %}
+            <h2 class="yl-candle-about-crystals__title">{{ section.settings.heading }}</h2>
+          {% endif %}
+
+          {% if section.settings.intro != blank %}
+            <div class="yl-candle-about-crystals__intro rte">
+              {{ section.settings.intro }}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      <div class="yl-candle-about-crystals__items">
+        {% for block in section.blocks %}
+          {% liquid
+            assign chakra_1_icon = blank
+            assign chakra_2_icon = blank
+            assign chakra_3_icon = blank
+            assign chakra_4_icon = blank
+
+            assign zodiac_1_icon = blank
+            assign zodiac_2_icon = blank
+            assign zodiac_3_icon = blank
+            assign zodiac_4_icon = blank
+
+            assign chakra_1_label = block.settings.chakra_1
+            assign chakra_2_label = block.settings.chakra_2
+            assign chakra_3_label = block.settings.chakra_3
+            assign chakra_4_label = block.settings.chakra_4
+
+            assign zodiac_1_label = block.settings.zodiac_1
+            assign zodiac_2_label = block.settings.zodiac_2
+            assign zodiac_3_label = block.settings.zodiac_3
+            assign zodiac_4_label = block.settings.zodiac_4
+
+            case block.settings.chakra_1
+              when 'Root Chakra'
+                assign chakra_1_icon = 'chakra-root.svg' | asset_url
+                assign chakra_1_label = 'Koreňová čakra'
+              when 'Sacral Chakra'
+                assign chakra_1_icon = 'chakra-sacral.svg' | asset_url
+                assign chakra_1_label = 'Sakrálna čakra'
+              when 'Solar Plexus'
+                assign chakra_1_icon = 'chakra-solar-plexus.svg' | asset_url
+                assign chakra_1_label = 'Solar plexus'
+              when 'Heart Chakra'
+                assign chakra_1_icon = 'chakra-heart.svg' | asset_url
+                assign chakra_1_label = 'Srdcová čakra'
+              when 'Throat Chakra'
+                assign chakra_1_icon = 'chakra-throat.svg' | asset_url
+                assign chakra_1_label = 'Krčná čakra'
+              when 'Third Eye'
+                assign chakra_1_icon = 'chakra-third-eye.svg' | asset_url
+                assign chakra_1_label = 'Tretie oko'
+              when 'Crown Chakra'
+                assign chakra_1_icon = 'chakra-crown.svg' | asset_url
+                assign chakra_1_label = 'Korunná čakra'
+            endcase
+
+            case block.settings.chakra_2
+              when 'Root Chakra'
+                assign chakra_2_icon = 'chakra-root.svg' | asset_url
+                assign chakra_2_label = 'Koreňová čakra'
+              when 'Sacral Chakra'
+                assign chakra_2_icon = 'chakra-sacral.svg' | asset_url
+                assign chakra_2_label = 'Sakrálna čakra'
+              when 'Solar Plexus'
+                assign chakra_2_icon = 'chakra-solar-plexus.svg' | asset_url
+                assign chakra_2_label = 'Solar plexus'
+              when 'Heart Chakra'
+                assign chakra_2_icon = 'chakra-heart.svg' | asset_url
+                assign chakra_2_label = 'Srdcová čakra'
+              when 'Throat Chakra'
+                assign chakra_2_icon = 'chakra-throat.svg' | asset_url
+                assign chakra_2_label = 'Krčná čakra'
+              when 'Third Eye'
+                assign chakra_2_icon = 'chakra-third-eye.svg' | asset_url
+                assign chakra_2_label = 'Tretie oko'
+              when 'Crown Chakra'
+                assign chakra_2_icon = 'chakra-crown.svg' | asset_url
+                assign chakra_2_label = 'Korunná čakra'
+            endcase
+
+            case block.settings.chakra_3
+              when 'Root Chakra'
+                assign chakra_3_icon = 'chakra-root.svg' | asset_url
+                assign chakra_3_label = 'Koreňová čakra'
+              when 'Sacral Chakra'
+                assign chakra_3_icon = 'chakra-sacral.svg' | asset_url
+                assign chakra_3_label = 'Sakrálna čakra'
+              when 'Solar Plexus'
+                assign chakra_3_icon = 'chakra-solar-plexus.svg' | asset_url
+                assign chakra_3_label = 'Solar plexus'
+              when 'Heart Chakra'
+                assign chakra_3_icon = 'chakra-heart.svg' | asset_url
+                assign chakra_3_label = 'Srdcová čakra'
+              when 'Throat Chakra'
+                assign chakra_3_icon = 'chakra-throat.svg' | asset_url
+                assign chakra_3_label = 'Krčná čakra'
+              when 'Third Eye'
+                assign chakra_3_icon = 'chakra-third-eye.svg' | asset_url
+                assign chakra_3_label = 'Tretie oko'
+              when 'Crown Chakra'
+                assign chakra_3_icon = 'chakra-crown.svg' | asset_url
+                assign chakra_3_label = 'Korunná čakra'
+            endcase
+
+            case block.settings.chakra_4
+              when 'Root Chakra'
+                assign chakra_4_icon = 'chakra-root.svg' | asset_url
+                assign chakra_4_label = 'Koreňová čakra'
+              when 'Sacral Chakra'
+                assign chakra_4_icon = 'chakra-sacral.svg' | asset_url
+                assign chakra_4_label = 'Sakrálna čakra'
+              when 'Solar Plexus'
+                assign chakra_4_icon = 'chakra-solar-plexus.svg' | asset_url
+                assign chakra_4_label = 'Solar plexus'
+              when 'Heart Chakra'
+                assign chakra_4_icon = 'chakra-heart.svg' | asset_url
+                assign chakra_4_label = 'Srdcová čakra'
+              when 'Throat Chakra'
+                assign chakra_4_icon = 'chakra-throat.svg' | asset_url
+                assign chakra_4_label = 'Krčná čakra'
+              when 'Third Eye'
+                assign chakra_4_icon = 'chakra-third-eye.svg' | asset_url
+                assign chakra_4_label = 'Tretie oko'
+              when 'Crown Chakra'
+                assign chakra_4_icon = 'chakra-crown.svg' | asset_url
+                assign chakra_4_label = 'Korunná čakra'
+            endcase
+
+            case block.settings.zodiac_1
+              when 'Aries'
+                assign zodiac_1_icon = 'zodiac-aries.svg' | asset_url
+                assign zodiac_1_label = 'Baran'
+              when 'Taurus'
+                assign zodiac_1_icon = 'zodiac-taurus.svg' | asset_url
+                assign zodiac_1_label = 'Býk'
+              when 'Gemini'
+                assign zodiac_1_icon = 'zodiac-gemini.svg' | asset_url
+                assign zodiac_1_label = 'Blíženci'
+              when 'Cancer'
+                assign zodiac_1_icon = 'zodiac-cancer.svg' | asset_url
+                assign zodiac_1_label = 'Rak'
+              when 'Leo'
+                assign zodiac_1_icon = 'zodiac-leo.svg' | asset_url
+                assign zodiac_1_label = 'Lev'
+              when 'Virgo'
+                assign zodiac_1_icon = 'zodiac-virgo.svg' | asset_url
+                assign zodiac_1_label = 'Panna'
+              when 'Libra'
+                assign zodiac_1_icon = 'zodiac-libra.svg' | asset_url
+                assign zodiac_1_label = 'Váhy'
+              when 'Scorpio'
+                assign zodiac_1_icon = 'zodiac-scorpio.svg' | asset_url
+                assign zodiac_1_label = 'Škorpión'
+              when 'Sagittarius'
+                assign zodiac_1_icon = 'zodiac-sagittarius.svg' | asset_url
+                assign zodiac_1_label = 'Strelec'
+              when 'Capricorn'
+                assign zodiac_1_icon = 'zodiac-capricorn.svg' | asset_url
+                assign zodiac_1_label = 'Kozorožec'
+              when 'Aquarius'
+                assign zodiac_1_icon = 'zodiac-aquarius.svg' | asset_url
+                assign zodiac_1_label = 'Vodnár'
+              when 'Pisces'
+                assign zodiac_1_icon = 'zodiac-pisces.svg' | asset_url
+                assign zodiac_1_label = 'Ryby'
+            endcase
+
+            case block.settings.zodiac_2
+              when 'Aries'
+                assign zodiac_2_icon = 'zodiac-aries.svg' | asset_url
+                assign zodiac_2_label = 'Baran'
+              when 'Taurus'
+                assign zodiac_2_icon = 'zodiac-taurus.svg' | asset_url
+                assign zodiac_2_label = 'Býk'
+              when 'Gemini'
+                assign zodiac_2_icon = 'zodiac-gemini.svg' | asset_url
+                assign zodiac_2_label = 'Blíženci'
+              when 'Cancer'
+                assign zodiac_2_icon = 'zodiac-cancer.svg' | asset_url
+                assign zodiac_2_label = 'Rak'
+              when 'Leo'
+                assign zodiac_2_icon = 'zodiac-leo.svg' | asset_url
+                assign zodiac_2_label = 'Lev'
+              when 'Virgo'
+                assign zodiac_2_icon = 'zodiac-virgo.svg' | asset_url
+                assign zodiac_2_label = 'Panna'
+              when 'Libra'
+                assign zodiac_2_icon = 'zodiac-libra.svg' | asset_url
+                assign zodiac_2_label = 'Váhy'
+              when 'Scorpio'
+                assign zodiac_2_icon = 'zodiac-scorpio.svg' | asset_url
+                assign zodiac_2_label = 'Škorpión'
+              when 'Sagittarius'
+                assign zodiac_2_icon = 'zodiac-sagittarius.svg' | asset_url
+                assign zodiac_2_label = 'Strelec'
+              when 'Capricorn'
+                assign zodiac_2_icon = 'zodiac-capricorn.svg' | asset_url
+                assign zodiac_2_label = 'Kozorožec'
+              when 'Aquarius'
+                assign zodiac_2_icon = 'zodiac-aquarius.svg' | asset_url
+                assign zodiac_2_label = 'Vodnár'
+              when 'Pisces'
+                assign zodiac_2_icon = 'zodiac-pisces.svg' | asset_url
+                assign zodiac_2_label = 'Ryby'
+            endcase
+
+            case block.settings.zodiac_3
+              when 'Aries'
+                assign zodiac_3_icon = 'zodiac-aries.svg' | asset_url
+                assign zodiac_3_label = 'Baran'
+              when 'Taurus'
+                assign zodiac_3_icon = 'zodiac-taurus.svg' | asset_url
+                assign zodiac_3_label = 'Býk'
+              when 'Gemini'
+                assign zodiac_3_icon = 'zodiac-gemini.svg' | asset_url
+                assign zodiac_3_label = 'Blíženci'
+              when 'Cancer'
+                assign zodiac_3_icon = 'zodiac-cancer.svg' | asset_url
+                assign zodiac_3_label = 'Rak'
+              when 'Leo'
+                assign zodiac_3_icon = 'zodiac-leo.svg' | asset_url
+                assign zodiac_3_label = 'Lev'
+              when 'Virgo'
+                assign zodiac_3_icon = 'zodiac-virgo.svg' | asset_url
+                assign zodiac_3_label = 'Panna'
+              when 'Libra'
+                assign zodiac_3_icon = 'zodiac-libra.svg' | asset_url
+                assign zodiac_3_label = 'Váhy'
+              when 'Scorpio'
+                assign zodiac_3_icon = 'zodiac-scorpio.svg' | asset_url
+                assign zodiac_3_label = 'Škorpión'
+              when 'Sagittarius'
+                assign zodiac_3_icon = 'zodiac-sagittarius.svg' | asset_url
+                assign zodiac_3_label = 'Strelec'
+              when 'Capricorn'
+                assign zodiac_3_icon = 'zodiac-capricorn.svg' | asset_url
+                assign zodiac_3_label = 'Kozorožec'
+              when 'Aquarius'
+                assign zodiac_3_icon = 'zodiac-aquarius.svg' | asset_url
+                assign zodiac_3_label = 'Vodnár'
+              when 'Pisces'
+                assign zodiac_3_icon = 'zodiac-pisces.svg' | asset_url
+                assign zodiac_3_label = 'Ryby'
+            endcase
+
+            case block.settings.zodiac_4
+              when 'Aries'
+                assign zodiac_4_icon = 'zodiac-aries.svg' | asset_url
+                assign zodiac_4_label = 'Baran'
+              when 'Taurus'
+                assign zodiac_4_icon = 'zodiac-taurus.svg' | asset_url
+                assign zodiac_4_label = 'Býk'
+              when 'Gemini'
+                assign zodiac_4_icon = 'zodiac-gemini.svg' | asset_url
+                assign zodiac_4_label = 'Blíženci'
+              when 'Cancer'
+                assign zodiac_4_icon = 'zodiac-cancer.svg' | asset_url
+                assign zodiac_4_label = 'Rak'
+              when 'Leo'
+                assign zodiac_4_icon = 'zodiac-leo.svg' | asset_url
+                assign zodiac_4_label = 'Lev'
+              when 'Virgo'
+                assign zodiac_4_icon = 'zodiac-virgo.svg' | asset_url
+                assign zodiac_4_label = 'Panna'
+              when 'Libra'
+                assign zodiac_4_icon = 'zodiac-libra.svg' | asset_url
+                assign zodiac_4_label = 'Váhy'
+              when 'Scorpio'
+                assign zodiac_4_icon = 'zodiac-scorpio.svg' | asset_url
+                assign zodiac_4_label = 'Škorpión'
+              when 'Sagittarius'
+                assign zodiac_4_icon = 'zodiac-sagittarius.svg' | asset_url
+                assign zodiac_4_label = 'Strelec'
+              when 'Capricorn'
+                assign zodiac_4_icon = 'zodiac-capricorn.svg' | asset_url
+                assign zodiac_4_label = 'Kozorožec'
+              when 'Aquarius'
+                assign zodiac_4_icon = 'zodiac-aquarius.svg' | asset_url
+                assign zodiac_4_label = 'Vodnár'
+              when 'Pisces'
+                assign zodiac_4_icon = 'zodiac-pisces.svg' | asset_url
+                assign zodiac_4_label = 'Ryby'
+            endcase
+          %}
+
+          <article class="yl-candle-about-crystals__item {% if block.settings.layout == 'image_left' %}is-reversed{% endif %}" {{ block.shopify_attributes }}>
+            <div class="yl-candle-about-crystals__grid">
+              <div class="yl-candle-about-crystals__content">
+                {% if block.settings.crystal_label != blank %}
+                  <p class="yl-candle-about-crystals__label">{{ block.settings.crystal_label }}</p>
+                {% endif %}
+
+                <div class="yl-candle-about-crystals__name-wrap">
+                  {% if block.settings.background_word != blank %}
+                    <div class="yl-candle-about-crystals__background-word">
+                      {{ block.settings.background_word }}
+                    </div>
+                  {% endif %}
+
+                  {% if block.settings.crystal_name != blank %}
+                    <h3 class="yl-candle-about-crystals__crystal-name">{{ block.settings.crystal_name }}</h3>
+                  {% endif %}
+                </div>
+
+                {% if block.settings.crystal_words != blank %}
+                  <div class="yl-candle-about-crystals__energy">
+                    {{ block.settings.crystal_words }}
+                  </div>
+                {% endif %}
+
+                {% if block.settings.description != blank %}
+                  <div class="yl-candle-about-crystals__description rte">
+                    {{ block.settings.description }}
+                  </div>
+                {% endif %}
+
+                <div class="yl-candle-about-crystals__meta">
+                  {% if block.settings.chakra_1 != blank or block.settings.chakra_2 != blank or block.settings.chakra_3 != blank or block.settings.chakra_4 != blank %}
+                    <div class="yl-candle-about-crystals__meta-group">
+                      <div class="yl-candle-about-crystals__meta-label">Čakry</div>
+
+                      <div class="yl-candle-about-crystals__chakra-list">
+                        {% if block.settings.chakra_1 != blank %}
+                          <div class="yl-candle-about-crystals__chakra-item">
+                            {% if chakra_1_icon != blank %}
+                              <img
+                                src="{{ chakra_1_icon }}"
+                                alt="{{ chakra_1_label }}"
+                                class="yl-candle-about-crystals__chakra-icon"
+                                loading="lazy"
+                                width="52"
+                                height="52"
+                              >
+                            {% endif %}
+                            <span>{{ chakra_1_label }}</span>
+                          </div>
+                        {% endif %}
+
+                        {% if block.settings.chakra_2 != blank %}
+                          <div class="yl-candle-about-crystals__chakra-item">
+                            {% if chakra_2_icon != blank %}
+                              <img
+                                src="{{ chakra_2_icon }}"
+                                alt="{{ chakra_2_label }}"
+                                class="yl-candle-about-crystals__chakra-icon"
+                                loading="lazy"
+                                width="52"
+                                height="52"
+                              >
+                            {% endif %}
+                            <span>{{ chakra_2_label }}</span>
+                          </div>
+                        {% endif %}
+
+                        {% if block.settings.chakra_3 != blank %}
+                          <div class="yl-candle-about-crystals__chakra-item">
+                            {% if chakra_3_icon != blank %}
+                              <img
+                                src="{{ chakra_3_icon }}"
+                                alt="{{ chakra_3_label }}"
+                                class="yl-candle-about-crystals__chakra-icon"
+                                loading="lazy"
+                                width="52"
+                                height="52"
+                              >
+                            {% endif %}
+                            <span>{{ chakra_3_label }}</span>
+                          </div>
+                        {% endif %}
+
+                        {% if block.settings.chakra_4 != blank %}
+                          <div class="yl-candle-about-crystals__chakra-item">
+                            {% if chakra_4_icon != blank %}
+                              <img
+                                src="{{ chakra_4_icon }}"
+                                alt="{{ chakra_4_label }}"
+                                class="yl-candle-about-crystals__chakra-icon"
+                                loading="lazy"
+                                width="52"
+                                height="52"
+                              >
+                            {% endif %}
+                            <span>{{ chakra_4_label }}</span>
+                          </div>
+                        {% endif %}
+                      </div>
+                    </div>
+                  {% endif %}
+
+                  {% if block.settings.zodiac_1 != blank or block.settings.zodiac_2 != blank or block.settings.zodiac_3 != blank or block.settings.zodiac_4 != blank %}
+                    <div class="yl-candle-about-crystals__meta-group">
+                      <div class="yl-candle-about-crystals__meta-label">Znamenia zverokruhu</div>
+
+                      <div class="yl-candle-about-crystals__zodiac-list">
+                        {% if block.settings.zodiac_1 != blank %}
+                          <div class="yl-candle-about-crystals__zodiac-item">
+                            {% if zodiac_1_icon != blank %}
+                              <img
+                                src="{{ zodiac_1_icon }}"
+                                alt="{{ zodiac_1_label }}"
+                                class="yl-candle-about-crystals__zodiac-icon"
+                                loading="lazy"
+                                width="42"
+                                height="42"
+                              >
+                            {% endif %}
+                            <span>{{ zodiac_1_label }}</span>
+                          </div>
+                        {% endif %}
+
+                        {% if block.settings.zodiac_2 != blank %}
+                          <div class="yl-candle-about-crystals__zodiac-item">
+                            {% if zodiac_2_icon != blank %}
+                              <img
+                                src="{{ zodiac_2_icon }}"
+                                alt="{{ zodiac_2_label }}"
+                                class="yl-candle-about-crystals__zodiac-icon"
+                                loading="lazy"
+                                width="42"
+                                height="42"
+                              >
+                            {% endif %}
+                            <span>{{ zodiac_2_label }}</span>
+                          </div>
+                        {% endif %}
+
+                        {% if block.settings.zodiac_3 != blank %}
+                          <div class="yl-candle-about-crystals__zodiac-item">
+                            {% if zodiac_3_icon != blank %}
+                              <img
+                                src="{{ zodiac_3_icon }}"
+                                alt="{{ zodiac_3_label }}"
+                                class="yl-candle-about-crystals__zodiac-icon"
+                                loading="lazy"
+                                width="42"
+                                height="42"
+                              >
+                            {% endif %}
+                            <span>{{ zodiac_3_label }}</span>
+                          </div>
+                        {% endif %}
+
+                        {% if block.settings.zodiac_4 != blank %}
+                          <div class="yl-candle-about-crystals__zodiac-item">
+                            {% if zodiac_4_icon != blank %}
+                              <img
+                                src="{{ zodiac_4_icon }}"
+                                alt="{{ zodiac_4_label }}"
+                                class="yl-candle-about-crystals__zodiac-icon"
+                                loading="lazy"
+                                width="42"
+                                height="42"
+                              >
+                            {% endif %}
+                            <span>{{ zodiac_4_label }}</span>
+                          </div>
+                        {% endif %}
+                      </div>
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+
+              <div class="yl-candle-about-crystals__visual">
+                <div class="yl-candle-about-crystals__visual-inner">
+                  {% if block.settings.image != blank %}
+                    <div class="yl-candle-about-crystals__image-wrap">
+                      {{ block.settings.image | image_url: width: 1600 | image_tag:
+                        loading: 'lazy',
+                        widths: '600, 800, 1000, 1200, 1400, 1600',
+                        class: 'yl-candle-about-crystals__image'
+                      }}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #yl-section-{{ section.id }} {
+    --yl-bg: {{ section_bg }};
+    --yl-text: {{ text_color }};
+    --yl-muted: {{ muted_text }};
+    --yl-accent: {{ accent_color }};
+    --yl-line: {{ soft_line }};
+    --yl-glow: {{ glow_color }};
+  }
+
+  #yl-section-{{ section.id }}.yl-candle-about-crystals {
+    position: relative;
+    overflow: hidden;
+    background: var(--yl-bg);
+    color: var(--yl-text);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1320px;
+    margin: 0 auto;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__head {
+    max-width: 840px;
+    margin: 0 auto 58px;
+    text-align: center;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__eyebrow {
+    margin: 0 0 16px;
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--yl-muted);
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__title {
+    margin: 0;
+    font-size: clamp(40px, 5vw, 78px);
+    line-height: 0.96;
+    letter-spacing: -0.055em;
+    font-weight: 500;
+    color: var(--yl-text);
+    text-wrap: balance;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__intro {
+    max-width: 670px;
+    margin: 24px auto 0;
+    font-size: 16px;
+    line-height: 1.9;
+    color: var(--yl-muted);
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__items {
+    display: flex;
+    flex-direction: column;
+    gap: 78px;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__item {
+    position: relative;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.06fr) minmax(380px, 0.88fr);
+    gap: 72px;
+    align-items: center;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__item.is-reversed .yl-candle-about-crystals__content {
+    order: 2;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__item.is-reversed .yl-candle-about-crystals__visual {
+    order: 1;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__content {
+    position: relative;
+    padding-top: 22px;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 92px;
+    height: 1px;
+    background: var(--yl-line);
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__label {
+    margin: 0 0 20px;
+    font-size: 13px;
+    line-height: 1;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--yl-muted);
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__name-wrap {
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__background-word {
+    position: absolute;
+    top: -0.2em;
+    left: 0;
+    font-size: clamp(64px, 10vw, 150px);
+    line-height: 0.9;
+    letter-spacing: -0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: color-mix(in srgb, var(--yl-accent) 7%, transparent);
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__crystal-name {
+    position: relative;
+    margin: 0;
+    font-size: clamp(62px, 9vw, 140px);
+    line-height: 0.88;
+    letter-spacing: -0.075em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--yl-text);
+    text-wrap: balance;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__energy {
+    max-width: 700px;
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 1.95;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--yl-accent);
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__description {
+    max-width: 700px;
+    margin-top: 24px;
+    font-size: 16px;
+    line-height: 1.95;
+    color: var(--yl-text);
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__meta {
+    margin-top: 42px;
+    display: grid;
+    gap: 30px;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__meta-group {
+    display: grid;
+    gap: 14px;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__meta-label {
+    font-size: 13px;
+    line-height: 1;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--yl-muted);
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__chakra-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__chakra-item {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-size: clamp(22px, 2.2vw, 34px);
+    line-height: 1.04;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--yl-text);
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__chakra-icon {
+    width: 48px;
+    height: 48px;
+    flex: 0 0 auto;
+    display: block;
+    object-fit: contain;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__zodiac-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 28px;
+    align-items: center;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__zodiac-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: clamp(20px, 1.9vw, 28px);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--yl-text);
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__zodiac-icon {
+    width: 34px;
+    height: 34px;
+    flex: 0 0 auto;
+    display: block;
+    object-fit: contain;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__visual-inner {
+    position: relative;
+    width: 100%;
+    min-height: 620px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__image-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 540px;
+    overflow: hidden;
+    border-radius: 34px;
+    background: transparent;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__image {
+    width: 100%;
+    height: auto;
+    max-height: 620px;
+    object-fit: cover;
+    display: block;
+    transform: none;
+  }
+
+  @media screen and (max-width: 1200px) {
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__grid {
+      gap: 48px;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.86fr);
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__visual-inner {
+      min-height: 560px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__image {
+      max-height: 560px;
+    }
+  }
+
+  @media screen and (max-width: 989px) {
+    #yl-section-{{ section.id }}.yl-candle-about-crystals {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__inner {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__head {
+      margin-bottom: 46px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__items {
+      gap: 60px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__grid {
+      grid-template-columns: 1fr;
+      gap: 34px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__visual {
+      order: 1 !important;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__content {
+      order: 2 !important;
+      padding-top: 12px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__visual-inner {
+      min-height: auto;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__image-wrap {
+      max-width: 100%;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__image {
+      max-height: 520px;
+      width: 100%;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__background-word {
+      font-size: clamp(58px, 14vw, 108px);
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__crystal-name {
+      font-size: clamp(54px, 12vw, 92px);
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__chakra-item {
+      font-size: 28px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__zodiac-item {
+      font-size: 22px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__inner {
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__head {
+      margin-bottom: 40px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__title {
+      font-size: 38px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__intro {
+      font-size: 15px;
+      line-height: 1.82;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__background-word {
+      font-size: 56px;
+      top: -0.1em;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__crystal-name {
+      font-size: 54px;
+      line-height: 0.92;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__energy {
+      margin-top: 18px;
+      font-size: 12px;
+      line-height: 1.9;
+      letter-spacing: 0.13em;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__description {
+      margin-top: 22px;
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__meta {
+      margin-top: 34px;
+      gap: 24px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__chakra-item {
+      font-size: 20px;
+      line-height: 1.12;
+      gap: 12px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__chakra-icon {
+      width: 30px;
+      height: 30px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__zodiac-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__zodiac-item {
+      font-size: 18px;
+      gap: 10px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__zodiac-icon {
+      width: 26px;
+      height: 26px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__image-wrap {
+      border-radius: 24px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__image {
+      max-height: 390px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "YL Sviečka — O kryštáloch",
+  "tag": "section",
+  "class": "section section-yl-candle-about-crystals",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Malý nadpis",
+      "default": "KRYŠTÁL VO SVIEČKE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Nadpis",
+      "default": "Jemná energia ukrytá vo vnútri"
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Úvodný text",
+      "default": "<p>Každý kryštál vnáša do sviečky vlastnú atmosféru, symboliku a jemný charakter. V Coco D’or opál dopĺňa mäkkosť kokosu a vanilky o pokoj, otvorenosť a tiché vnútorné svetlo.</p>"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Horný spacing",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Spodný spacing",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "unit": "px",
+      "default": 84
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Horný spacing na mobile",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Spodný spacing na mobile",
+      "min": 0,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Pozadie sekcie",
+      "default": "#FFFBED"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Farba textu",
+      "default": "#742415"
+    },
+    {
+      "type": "color",
+      "id": "muted_text",
+      "label": "Tlmená farba textu",
+      "default": "#8E6757"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Akcentová farba",
+      "default": "#742415"
+    },
+    {
+      "type": "color",
+      "id": "soft_line",
+      "label": "Farba jemnej linky",
+      "default": "#E8D8CD"
+    },
+    {
+      "type": "color",
+      "id": "glow_color",
+      "label": "Farba jemného žiarenia",
+      "default": "#F6E5DA"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "crystal",
+      "name": "Kryštál",
+      "settings": [
+        {
+          "type": "select",
+          "id": "layout",
+          "label": "Rozloženie",
+          "options": [
+            { "value": "text_left", "label": "Text vľavo / obrázok vpravo" },
+            { "value": "image_left", "label": "Obrázok vľavo / text vpravo" }
+          ],
+          "default": "text_left"
+        },
+        {
+          "type": "text",
+          "id": "crystal_label",
+          "label": "Malý štítok",
+          "default": "Hlavný kryštál"
+        },
+        {
+          "type": "text",
+          "id": "background_word",
+          "label": "Veľké vyblednuté slovo v pozadí",
+          "default": "Opál"
+        },
+        {
+          "type": "text",
+          "id": "crystal_name",
+          "label": "Názov kryštálu",
+          "default": "Opál"
+        },
+        {
+          "type": "text",
+          "id": "crystal_words",
+          "label": "Slová / vlastnosti",
+          "default": "Jemnosť | Svetlo | Emocionálne povzbudenie | Otvorenosť | Pokoj | Vnútorný jas"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Popis",
+          "default": "<p>Opál nesie jemnú, svetelnú energiu, ktorá pôsobí nežne a ticho žiarivo. Často sa spája s citlivosťou, emocionálnou otvorenosťou a návratom k ľahkosti. V Coco D’or dopĺňa krémové tóny kokosu a vanilky o mäkkosť, pokoj a subtílny vnútorný jas.</p>"
+        },
+        {
+          "type": "select",
+          "id": "chakra_1",
+          "label": "Čakra 1",
+          "options": [
+            { "value": "", "label": "Žiadna" },
+            { "value": "Root Chakra", "label": "Koreňová čakra" },
+            { "value": "Sacral Chakra", "label": "Sakrálna čakra" },
+            { "value": "Solar Plexus", "label": "Solar plexus" },
+            { "value": "Heart Chakra", "label": "Srdcová čakra" },
+            { "value": "Throat Chakra", "label": "Krčná čakra" },
+            { "value": "Third Eye", "label": "Tretie oko" },
+            { "value": "Crown Chakra", "label": "Korunná čakra" }
+          ],
+          "default": "Heart Chakra"
+        },
+        {
+          "type": "select",
+          "id": "chakra_2",
+          "label": "Čakra 2",
+          "options": [
+            { "value": "", "label": "Žiadna" },
+            { "value": "Root Chakra", "label": "Koreňová čakra" },
+            { "value": "Sacral Chakra", "label": "Sakrálna čakra" },
+            { "value": "Solar Plexus", "label": "Solar plexus" },
+            { "value": "Heart Chakra", "label": "Srdcová čakra" },
+            { "value": "Throat Chakra", "label": "Krčná čakra" },
+            { "value": "Third Eye", "label": "Tretie oko" },
+            { "value": "Crown Chakra", "label": "Korunná čakra" }
+          ],
+          "default": "Crown Chakra"
+        },
+        {
+          "type": "select",
+          "id": "chakra_3",
+          "label": "Čakra 3",
+          "options": [
+            { "value": "", "label": "Žiadna" },
+            { "value": "Root Chakra", "label": "Koreňová čakra" },
+            { "value": "Sacral Chakra", "label": "Sakrálna čakra" },
+            { "value": "Solar Plexus", "label": "Solar plexus" },
+            { "value": "Heart Chakra", "label": "Srdcová čakra" },
+            { "value": "Throat Chakra", "label": "Krčná čakra" },
+            { "value": "Third Eye", "label": "Tretie oko" },
+            { "value": "Crown Chakra", "label": "Korunná čakra" }
+          ],
+          "default": ""
+        },
+        {
+          "type": "select",
+          "id": "chakra_4",
+          "label": "Čakra 4",
+          "options": [
+            { "value": "", "label": "Žiadna" },
+            { "value": "Root Chakra", "label": "Koreňová čakra" },
+            { "value": "Sacral Chakra", "label": "Sakrálna čakra" },
+            { "value": "Solar Plexus", "label": "Solar plexus" },
+            { "value": "Heart Chakra", "label": "Srdcová čakra" },
+            { "value": "Throat Chakra", "label": "Krčná čakra" },
+            { "value": "Third Eye", "label": "Tretie oko" },
+            { "value": "Crown Chakra", "label": "Korunná čakra" }
+          ],
+          "default": ""
+        },
+        {
+          "type": "select",
+          "id": "zodiac_1",
+          "label": "Znamenie 1",
+          "options": [
+            { "value": "", "label": "Žiadne" },
+            { "value": "Aries", "label": "Baran" },
+            { "value": "Taurus", "label": "Býk" },
+            { "value": "Gemini", "label": "Blíženci" },
+            { "value": "Cancer", "label": "Rak" },
+            { "value": "Leo", "label": "Lev" },
+            { "value": "Virgo", "label": "Panna" },
+            { "value": "Libra", "label": "Váhy" },
+            { "value": "Scorpio", "label": "Škorpión" },
+            { "value": "Sagittarius", "label": "Strelec" },
+            { "value": "Capricorn", "label": "Kozorožec" },
+            { "value": "Aquarius", "label": "Vodnár" },
+            { "value": "Pisces", "label": "Ryby" }
+          ],
+          "default": "Libra"
+        },
+        {
+          "type": "select",
+          "id": "zodiac_2",
+          "label": "Znamenie 2",
+          "options": [
+            { "value": "", "label": "Žiadne" },
+            { "value": "Aries", "label": "Baran" },
+            { "value": "Taurus", "label": "Býk" },
+            { "value": "Gemini", "label": "Blíženci" },
+            { "value": "Cancer", "label": "Rak" },
+            { "value": "Leo", "label": "Lev" },
+            { "value": "Virgo", "label": "Panna" },
+            { "value": "Libra", "label": "Váhy" },
+            { "value": "Scorpio", "label": "Škorpión" },
+            { "value": "Sagittarius", "label": "Strelec" },
+            { "value": "Capricorn", "label": "Kozorožec" },
+            { "value": "Aquarius", "label": "Vodnár" },
+            { "value": "Pisces", "label": "Ryby" }
+          ],
+          "default": "Pisces"
+        },
+        {
+          "type": "select",
+          "id": "zodiac_3",
+          "label": "Znamenie 3",
+          "options": [
+            { "value": "", "label": "Žiadne" },
+            { "value": "Aries", "label": "Baran" },
+            { "value": "Taurus", "label": "Býk" },
+            { "value": "Gemini", "label": "Blíženci" },
+            { "value": "Cancer", "label": "Rak" },
+            { "value": "Leo", "label": "Lev" },
+            { "value": "Virgo", "label": "Panna" },
+            { "value": "Libra", "label": "Váhy" },
+            { "value": "Scorpio", "label": "Škorpión" },
+            { "value": "Sagittarius", "label": "Strelec" },
+            { "value": "Capricorn", "label": "Kozorožec" },
+            { "value": "Aquarius", "label": "Vodnár" },
+            { "value": "Pisces", "label": "Ryby" }
+          ],
+          "default": "Cancer"
+        },
+        {
+          "type": "select",
+          "id": "zodiac_4",
+          "label": "Znamenie 4",
+          "options": [
+            { "value": "", "label": "Žiadne" },
+            { "value": "Aries", "label": "Baran" },
+            { "value": "Taurus", "label": "Býk" },
+            { "value": "Gemini", "label": "Blíženci" },
+            { "value": "Cancer", "label": "Rak" },
+            { "value": "Leo", "label": "Lev" },
+            { "value": "Virgo", "label": "Panna" },
+            { "value": "Libra", "label": "Váhy" },
+            { "value": "Scorpio", "label": "Škorpión" },
+            { "value": "Sagittarius", "label": "Strelec" },
+            { "value": "Capricorn", "label": "Kozorožec" },
+            { "value": "Aquarius", "label": "Vodnár" },
+            { "value": "Pisces", "label": "Ryby" }
+          ],
+          "default": ""
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Obrázok kryštálu"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "YL Sviečka — O kryštáloch",
+      "blocks": [
+        {
+          "type": "crystal"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
