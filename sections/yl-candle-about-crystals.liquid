@@ -7,21 +7,21 @@
   assign glow_color = section.settings.glow_color
 %}
 
-<section class="yl-candle-about-crystals" id="yl-section-{{ section.id }}">
+<section class="yl-candle-about-crystals yl-section" id="yl-section-{{ section.id }}">
   <div class="page-width">
-    <div class="yl-candle-about-crystals__inner">
+    <div class="yl-candle-about-crystals__inner yl-section__inner">
       {% if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.intro != blank %}
         <div class="yl-candle-about-crystals__head">
           {% if section.settings.eyebrow != blank %}
-            <p class="yl-candle-about-crystals__eyebrow">{{ section.settings.eyebrow }}</p>
+            <p class="yl-candle-about-crystals__eyebrow yl-eyebrow">{{ section.settings.eyebrow }}</p>
           {% endif %}
 
           {% if section.settings.heading != blank %}
-            <h2 class="yl-candle-about-crystals__title">{{ section.settings.heading }}</h2>
+            <h2 class="yl-candle-about-crystals__title yl-title-lg">{{ section.settings.heading }}</h2>
           {% endif %}
 
           {% if section.settings.intro != blank %}
-            <div class="yl-candle-about-crystals__intro rte">
+            <div class="yl-candle-about-crystals__intro yl-body rte">
               {{ section.settings.intro }}
             </div>
           {% endif %}
@@ -309,7 +309,7 @@
             {{ block.shopify_attributes }}
           >
             <div class="yl-candle-about-crystals__grid">
-              <div class="yl-candle-about-crystals__content">
+              <div class="yl-candle-about-crystals__content yl-top-line">
                 {% if block.settings.crystal_label != blank %}
                   <p class="yl-candle-about-crystals__label">{{ block.settings.crystal_label }}</p>
                 {% endif %}
@@ -518,474 +518,421 @@
 </section>
 
 <style>
-    #yl-section-{{ section.id }} {
-      --yl-bg: {{ section_bg }};
-      --yl-text: {{ text_color }};
-      --yl-muted: {{ muted_text }};
-      --yl-accent: {{ accent_color }};
-      --yl-line: {{ soft_line }};
-      --yl-glow: {{ glow_color }};
-    }
+  #yl-section-{{ section.id }} {
+    --yl-bg: {{ section_bg }};
+    --yl-text: {{ text_color }};
+    --yl-muted: {{ muted_text }};
+    --yl-accent: {{ accent_color }};
+    --yl-line: {{ soft_line }};
+    --yl-glow: {{ glow_color }};
+  }
 
-    #yl-section-{{ section.id }}.yl-candle-about-crystals {
-      position: relative;
-      overflow: hidden;
-      background: var(--yl-bg);
-      color: var(--yl-text);
-      {% comment %} padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px; {% endcomment %}
-      padding: 64px 0
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__inner {
-      position: relative;
-      z-index: 2;
-      max-width: 1320px;
-      margin: 0 auto;
-      padding-left: 32px;
-      padding-right: 32px;
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__head {
-      max-width: 840px;
-      margin: 0 auto 58px;
-      text-align: center;
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__eyebrow {
-      margin: 0 0 16px;
-      font-size: 12px;
-      line-height: 1;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--yl-muted);
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__title {
-      margin: 0;
-      font-size: clamp(40px, 5vw, 78px);
-      line-height: 0.96;
-      letter-spacing: -0.055em;
-      font-weight: 500;
-      color: var(--yl-text);
-      text-wrap: balance;
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__intro {
-      max-width: 670px;
-      margin: 24px auto 0;
-      font-size: 16px;
-      line-height: 1.9;
-      color: var(--yl-muted);
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__items {
-      display: flex;
-      flex-direction: column;
-      gap: 78px;
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__item {
-      position: relative;
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.06fr) minmax(380px, 0.88fr);
-      gap: 72px;
-      align-items: center;
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__item.is-reversed .yl-candle-about-crystals__content {
-      order: 2;
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__item.is-reversed .yl-candle-about-crystals__visual {
-      order: 1;
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__content {
-      position: relative;
-      padding-top: 22px;
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__content::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 92px;
-      height: 1px;
-      background: var(--yl-line);
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__label {
-      margin: 0 0 20px;
-      font-size: 13px;
-      line-height: 1;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--yl-muted);
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__name-wrap {
-      position: relative;
-      margin-bottom: 20px;
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__background-word {
-      position: absolute;
-      top: -0.2em;
-      left: 0;
-      font-size: clamp(64px, 10vw, 150px);
-      line-height: 0.9;
-      letter-spacing: -0.08em;
-      text-transform: uppercase;
-      font-weight: 700;
-      color: color-mix(in srgb, var(--yl-accent) 7%, transparent);
-      pointer-events: none;
-      user-select: none;
-      white-space: nowrap;
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__crystal-name {
-      position: relative;
-      margin: 0;
-      font-size: clamp(62px, 9vw, 140px);
-      line-height: 0.88;
-      letter-spacing: -0.075em;
-      text-transform: uppercase;
-      font-weight: 600;
-      color: var(--yl-text);
-      text-wrap: balance;
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__energy {
-      max-width: 700px;
-      margin-top: 12px;
-      font-size: 14px;
-      line-height: 1.95;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--yl-accent);
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__description {
-      max-width: 700px;
-      margin-top: 24px;
-      font-size: 16px;
-      line-height: 1.95;
-      color: var(--yl-text);
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__meta {
-      margin-top: 42px;
-      display: grid;
-      gap: 30px;
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__meta-group {
-      display: grid;
-      gap: 14px;
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__meta-label {
-      font-size: 13px;
-      line-height: 1;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--yl-muted);
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__chakra-list {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__chakra-item {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      font-size: clamp(22px, 2.2vw, 34px);
-      line-height: 1.04;
-      letter-spacing: -0.04em;
-      text-transform: uppercase;
-      font-weight: 500;
-      color: var(--yl-text);
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__chakra-icon {
-      width: 48px;
-      height: 48px;
-      flex: 0 0 auto;
-      display: block;
-      object-fit: contain;
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__zodiac-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px 28px;
-      align-items: center;
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__zodiac-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      font-size: clamp(20px, 1.9vw, 28px);
-      line-height: 1.08;
-      letter-spacing: -0.03em;
-      text-transform: uppercase;
-      font-weight: 500;
-      color: var(--yl-text);
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__zodiac-icon {
-      width: 34px;
-      height: 34px;
-      flex: 0 0 auto;
-      display: block;
-      object-fit: contain;
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__visual {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__visual-inner {
-      position: relative;
-      width: 100%;
-      min-height: 620px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__image-wrap {
-      position: relative;
-      width: 100%;
-      max-width: 540px;
-      border-radius: 34px;
-      background: transparent;
-    }
-
-    #yl-section-{{ section.id }} .yl-candle-about-crystals__image {
-      width: 100%;
-      height: auto;
-      max-height: 620px;
-      object-fit: contain;
-      display: block;
-      transform: none;
-    }
-
-    @media screen and (max-width: 1200px) {
-      #yl-section-{{ section.id }} .yl-candle-about-crystals__grid {
-        gap: 48px;
-        grid-template-columns: minmax(0, 1fr) minmax(320px, 0.86fr);
-      }
-
-      #yl-section-{{ section.id }} .yl-candle-about-crystals__visual-inner {
-        min-height: 560px;
-      }
-
-      #yl-section-{{ section.id }} .yl-candle-about-crystals__image {
-        max-height: 560px;
-      }
-    }
-
-    @media screen and (max-width: 989px) {
   #yl-section-{{ section.id }}.yl-candle-about-crystals {
-    padding: 32px 0;
+    padding-top: 64px;
+    padding-bottom: 64px;
   }
 
   #yl-section-{{ section.id }} .yl-candle-about-crystals__inner {
-    padding-left: 24px;
-    padding-right: 24px;
+    z-index: 2;
   }
 
   #yl-section-{{ section.id }} .yl-candle-about-crystals__head {
-    margin-bottom: 46px;
+    max-width: 840px;
+    margin: 0 auto 58px;
+    text-align: center;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__intro {
+    max-width: 670px;
+    margin: 24px auto 0;
+    color: var(--yl-muted);
   }
 
   #yl-section-{{ section.id }} .yl-candle-about-crystals__items {
-    gap: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 78px;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__item {
+    position: relative;
   }
 
   #yl-section-{{ section.id }} .yl-candle-about-crystals__grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
-  #yl-section-{{ section.id }} .yl-candle-about-crystals__content {
-    order: 1 !important;
-    padding-top: 20px;
-    text-align: center;
-  }
-
-  #yl-section-{{ section.id }} .yl-candle-about-crystals__visual {
-    order: 2 !important;
-  }
-
-  #yl-section-{{ section.id }} .yl-candle-about-crystals__content::before {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  #yl-section-{{ section.id }} .yl-candle-about-crystals__label,
-  #yl-section-{{ section.id }} .yl-candle-about-crystals__energy,
-  #yl-section-{{ section.id }} .yl-candle-about-crystals__description,
-  #yl-section-{{ section.id }} .yl-candle-about-crystals__meta-label {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  #yl-section-{{ section.id }} .yl-candle-about-crystals__name-wrap,
-  #yl-section-{{ section.id }} .yl-candle-about-crystals__meta {
-    justify-items: center;
-  }
-
-  #yl-section-{{ section.id }} .yl-candle-about-crystals__background-word {
-    font-size: clamp(58px, 14vw, 108px);
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    text-align: center;
-  }
-
-  #yl-section-{{ section.id }} .yl-candle-about-crystals__crystal-name {
-    font-size: clamp(54px, 12vw, 92px);
-    text-align: center;
-  }
-
-  #yl-section-{{ section.id }} .yl-candle-about-crystals__chakra-list {
+    display: grid;
+    grid-template-columns: minmax(0, 1.06fr) minmax(380px, 0.88fr);
+    gap: 72px;
     align-items: center;
   }
 
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__item.is-reversed .yl-candle-about-crystals__content {
+    order: 2;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__item.is-reversed .yl-candle-about-crystals__visual {
+    order: 1;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__content {
+    position: relative;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__label {
+    margin: 0 0 20px;
+    font-size: 13px;
+    line-height: 1;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--yl-muted);
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__name-wrap {
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__background-word {
+    position: absolute;
+    top: -0.2em;
+    left: 0;
+    font-size: var(--yl-heading-crystal-bg);
+    line-height: 0.9;
+    letter-spacing: -0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: color-mix(in srgb, var(--yl-accent) 7%, transparent);
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__crystal-name {
+    position: relative;
+    margin: 0;
+    font-size: var(--yl-heading-crystal);
+    line-height: 0.88;
+    letter-spacing: -0.075em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--yl-text);
+    text-wrap: balance;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__energy {
+    max-width: 700px;
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 1.95;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--yl-accent);
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__description {
+    max-width: 700px;
+    margin-top: 24px;
+    font-size: var(--yl-font-size-body);
+    line-height: var(--yl-line-height-body);
+    color: var(--yl-text);
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__description p {
+    margin: 0;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__description p + p {
+    margin-top: 16px;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__meta {
+    margin-top: 42px;
+    display: grid;
+    gap: 30px;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__meta-group {
+    display: grid;
+    gap: 14px;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__meta-label {
+    font-size: 13px;
+    line-height: 1;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--yl-muted);
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__chakra-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
   #yl-section-{{ section.id }} .yl-candle-about-crystals__chakra-item {
-    font-size: 28px;
-    justify-content: center;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-size: clamp(22px, 2.2vw, 34px);
+    line-height: 1.04;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--yl-text);
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__chakra-icon {
+    width: 48px;
+    height: 48px;
+    flex: 0 0 auto;
+    display: block;
+    object-fit: contain;
   }
 
   #yl-section-{{ section.id }} .yl-candle-about-crystals__zodiac-list {
-    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 28px;
+    align-items: center;
   }
 
   #yl-section-{{ section.id }} .yl-candle-about-crystals__zodiac-item {
-    font-size: 22px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: clamp(20px, 1.9vw, 28px);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--yl-text);
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__zodiac-icon {
+    width: 34px;
+    height: 34px;
+    flex: 0 0 auto;
+    display: block;
+    object-fit: contain;
+  }
+
+  #yl-section-{{ section.id }} .yl-candle-about-crystals__visual {
+    display: flex;
+    align-items: center;
     justify-content: center;
   }
 
   #yl-section-{{ section.id }} .yl-candle-about-crystals__visual-inner {
-    min-height: auto;
+    width: 100%;
+    min-height: 620px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   #yl-section-{{ section.id }} .yl-candle-about-crystals__image-wrap {
-    max-width: 300px;
-    margin: 0 auto;
+    width: 100%;
+    max-width: 540px;
+    border-radius: 34px;
+    background: transparent;
   }
 
   #yl-section-{{ section.id }} .yl-candle-about-crystals__image {
     width: 100%;
-    max-height: 300px;
+    height: auto;
+    max-height: 620px;
     object-fit: contain;
+    display: block;
   }
-}
 
-    @media screen and (max-width: 749px) {
-      #yl-section-{{ section.id }} .yl-candle-about-crystals__inner {
-        padding-left: 18px;
-        padding-right: 18px;
-      }
-
-      #yl-section-{{ section.id }} .yl-candle-about-crystals__head {
-        margin-bottom: 40px;
-      }
-
-      #yl-section-{{ section.id }} .yl-candle-about-crystals__title {
-        font-size: 38px;
-      }
-
-      #yl-section-{{ section.id }} .yl-candle-about-crystals__intro {
-        font-size: 15px;
-        line-height: 1.82;
-      }
-
-      #yl-section-{{ section.id }} .yl-candle-about-crystals__background-word {
-        font-size: 56px;
-        top: -0.1em;
-      }
-
-      #yl-section-{{ section.id }} .yl-candle-about-crystals__crystal-name {
-        font-size: 54px;
-        line-height: 0.92;
-      }
-
-      #yl-section-{{ section.id }} .yl-candle-about-crystals__energy {
-        margin-top: 18px;
-        font-size: 12px;
-        line-height: 1.9;
-        letter-spacing: 0.13em;
-      }
-
-      #yl-section-{{ section.id }} .yl-candle-about-crystals__description {
-        margin-top: 22px;
-        font-size: 15px;
-        line-height: 1.85;
-      }
-
-      #yl-section-{{ section.id }} .yl-candle-about-crystals__meta {
-        margin-top: 34px;
-        gap: 24px;
-      }
-
-      #yl-section-{{ section.id }} .yl-candle-about-crystals__chakra-item {
-        font-size: 20px;
-        line-height: 1.12;
-        gap: 12px;
-      }
-
-      #yl-section-{{ section.id }} .yl-candle-about-crystals__chakra-icon {
-        width: 30px;
-        height: 30px;
-      }
-
-      #yl-section-{{ section.id }} .yl-candle-about-crystals__zodiac-list {
-        display: grid;
-        gap: 12px;
-      }
-
-      #yl-section-{{ section.id }} .yl-candle-about-crystals__zodiac-item {
-        font-size: 18px;
-        gap: 10px;
-      }
-
-      #yl-section-{{ section.id }} .yl-candle-about-crystals__zodiac-icon {
-        width: 26px;
-        height: 26px;
-      }
-#yl-section-{{ section.id }} .yl-candle-about-crystals__image-wrap {
-  max-width: 240px;
-  margin: 0 auto;
-  border-radius: 24px;
-}
-
-#yl-section-{{ section.id }} .yl-candle-about-crystals__image {
-  max-height: 240px;
-  object-fit: contain;
-}
+  @media screen and (max-width: 1200px) {
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__grid {
+      gap: 48px;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.86fr);
     }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__visual-inner {
+      min-height: 560px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__image {
+      max-height: 560px;
+    }
+  }
+
+  @media screen and (max-width: 989px) {
+    #yl-section-{{ section.id }}.yl-candle-about-crystals {
+      padding-top: 32px;
+      padding-bottom: 32px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__head {
+      margin-bottom: 46px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__items {
+      gap: 60px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__content {
+      order: 1 !important;
+      padding-top: 20px;
+      text-align: center;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__content::before {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__visual {
+      order: 2 !important;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__label,
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__energy,
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__description,
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__meta-label {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__name-wrap,
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__meta {
+      justify-items: center;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__background-word {
+      font-size: clamp(58px, 14vw, 108px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      text-align: center;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__crystal-name {
+      font-size: clamp(54px, 12vw, 92px);
+      text-align: center;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__chakra-list {
+      align-items: center;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__chakra-item {
+      font-size: 28px;
+      justify-content: center;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__zodiac-list {
+      justify-content: center;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__zodiac-item {
+      font-size: 22px;
+      justify-content: center;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__visual-inner {
+      min-height: auto;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__image-wrap {
+      max-width: 300px;
+      margin: 0 auto;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__image {
+      max-height: 300px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__head {
+      margin-bottom: 40px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__intro {
+      font-size: 15px;
+      line-height: 1.82;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__background-word {
+      font-size: 56px;
+      top: -0.1em;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__crystal-name {
+      font-size: 54px;
+      line-height: 0.92;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__energy {
+      margin-top: 18px;
+      font-size: 12px;
+      line-height: 1.9;
+      letter-spacing: 0.13em;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__description {
+      margin-top: 22px;
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__meta {
+      margin-top: 34px;
+      gap: 24px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__chakra-item {
+      font-size: 20px;
+      line-height: 1.12;
+      gap: 12px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__chakra-icon {
+      width: 30px;
+      height: 30px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__zodiac-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__zodiac-item {
+      font-size: 18px;
+      gap: 10px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__zodiac-icon {
+      width: 26px;
+      height: 26px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__image-wrap {
+      max-width: 240px;
+      margin: 0 auto;
+      border-radius: 24px;
+    }
+
+    #yl-section-{{ section.id }} .yl-candle-about-crystals__image {
+      max-height: 240px;
+    }
+  }
 </style>
 
 {% schema %}
 {
   "name": "YL Sviečka — O kryštáloch",
   "tag": "section",
-  "class": "section section-yl-candle-about-crystals",
+  "class": "section-yl-candle-about-crystals",
   "settings": [
     {
       "type": "text",

@@ -4948,3 +4948,196 @@ product-recommendations:has([data-has-recommendations='false']) {
     translate: 0px var(--atc-destination, 0px);
   }
 }
+
+/*! CUSTOM SECTION SIZING */
+
+:root {
+  /* Container */
+  --yl-container-max: 1320px;
+  --yl-container-pad-desktop: 32px;
+  --yl-container-pad-tablet: 24px;
+  --yl-container-pad-mobile: 18px;
+
+  /* Section spacing */
+  --yl-section-padding-top-desktop: 64px;
+  --yl-section-padding-bottom-desktop: 128px;
+  --yl-section-padding-top-mobile: 72px;
+  --yl-section-padding-bottom-mobile: 80px;
+
+  /* Type */
+  --yl-font-size-eyebrow: 12px;
+  --yl-font-size-body: 16px;
+  --yl-font-size-body-mobile: 15px;
+  --yl-font-size-quote: 20px;
+  --yl-font-size-quote-mobile: 18px;
+  --yl-font-size-meta: 12px;
+  --yl-font-size-meta-mobile: 11px;
+
+  --yl-heading-xl: clamp(40px, 10vw, 68px);
+  --yl-heading-lg: clamp(40px, 5vw, 78px);
+  --yl-heading-crystal: clamp(62px, 9vw, 140px);
+  --yl-heading-crystal-bg: clamp(64px, 10vw, 150px);
+
+  --yl-line-height-heading: 0.96;
+  --yl-line-height-body: 1.95;
+  --yl-line-height-body-mobile: 1.85;
+
+  --yl-letter-spacing-eyebrow: 0.22em;
+  --yl-letter-spacing-subtitle: 0.24em;
+  --yl-letter-spacing-heading: -0.06em;
+  --yl-letter-spacing-heading-soft: -0.055em;
+}
+
+/* Base heading reset */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Shared section shell */
+.yl-section {
+  position: relative;
+  overflow: hidden;
+  background: var(--yl-bg);
+  color: var(--yl-text);
+  padding: var(--yl-section-padding-top-desktop) 0 var(--yl-section-padding-bottom-desktop);
+}
+
+.yl-section__inner {
+  position: relative;
+  max-width: var(--yl-container-max);
+  margin: 0 auto;
+  padding-left: var(--yl-container-pad-desktop);
+  padding-right: var(--yl-container-pad-desktop);
+}
+
+.yl-eyebrow {
+  margin: 0 0 18px;
+  font-size: var(--yl-font-size-eyebrow);
+  line-height: 1;
+  letter-spacing: var(--yl-letter-spacing-eyebrow);
+  text-transform: uppercase;
+  color: var(--yl-muted);
+}
+
+.yl-title-xl {
+  margin: 0;
+  font-size: var(--yl-heading-xl);
+  line-height: var(--yl-line-height-heading);
+  letter-spacing: var(--yl-letter-spacing-heading);
+  font-weight: 500;
+  color: var(--yl-text);
+  text-wrap: balance;
+}
+
+.yl-title-lg {
+  margin: 0;
+  font-size: var(--yl-heading-lg);
+  line-height: var(--yl-line-height-heading);
+  letter-spacing: var(--yl-letter-spacing-heading-soft);
+  font-weight: 500;
+  color: var(--yl-text);
+  text-wrap: balance;
+}
+
+.yl-subtitle {
+  margin: 24px 0 0;
+  font-size: clamp(18px, 1.8vw, 26px);
+  line-height: 1.2;
+  letter-spacing: var(--yl-letter-spacing-subtitle);
+  text-transform: uppercase;
+  color: var(--yl-accent);
+}
+
+.yl-body {
+  font-size: var(--yl-font-size-body);
+  line-height: var(--yl-line-height-body);
+  color: var(--yl-text);
+}
+
+.yl-body p {
+  margin: 0;
+}
+
+.yl-body p + p {
+  margin-top: 16px;
+}
+
+.yl-quote {
+  font-size: var(--yl-font-size-quote);
+  line-height: 1.55;
+  letter-spacing: -0.03em;
+  color: var(--yl-accent);
+}
+
+.yl-meta-line {
+  font-size: var(--yl-font-size-meta);
+  line-height: 1.9;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--yl-muted);
+}
+
+.yl-top-line {
+  position: relative;
+  padding-top: 24px;
+}
+
+.yl-top-line::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 92px;
+  height: 1px;
+  background: var(--yl-line);
+}
+
+@media screen and (max-width: 989px) {
+  .yl-section__inner {
+    padding-left: var(--yl-container-pad-tablet);
+    padding-right: var(--yl-container-pad-tablet);
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .yl-section {
+    padding: var(--yl-section-padding-top-mobile) 0 var(--yl-section-padding-bottom-mobile);
+  }
+
+  .yl-section__inner {
+    padding-left: var(--yl-container-pad-mobile);
+    padding-right: var(--yl-container-pad-mobile);
+  }
+
+  .yl-eyebrow {
+    margin-bottom: 14px;
+  }
+
+  .yl-title-xl,
+  .yl-title-lg {
+    font-size: 38px;
+    line-height: 0.98;
+  }
+
+  .yl-body {
+    font-size: var(--yl-font-size-body-mobile);
+    line-height: var(--yl-line-height-body-mobile);
+  }
+
+  .yl-quote {
+    font-size: var(--yl-font-size-quote-mobile);
+    line-height: 1.5;
+  }
+
+  .yl-meta-line {
+    font-size: var(--yl-font-size-meta-mobile);
+    line-height: 1.85;
+    letter-spacing: 0.16em;
+  }
+}
